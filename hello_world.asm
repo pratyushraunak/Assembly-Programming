@@ -2,36 +2,26 @@
 ;Author=Pratyush
 ;compile=nasm -f elf32 -o hello_world.o hello_world.asm
 ;link=ld -m elf_i386 hello_world.o -o hello_world
+section         .data
 
-global _start
+msg     db "Hello World!", 0xA, 0xD
+len     equ $-msg
+section         .text
 
-section	.text
+global  _start
 
- _start:
+_start:
 
- 		mov eax, 0x4
- 		mov ebx, 0x1
- 		mov ecx, message
- 		mov edx, mlen
- 		int 0x80
-
-
-
- 		mov eax,0x1
- 		mov ebx,0x5
- 		int 0x80
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, msg
+        mov edx, len
+        int 0x80
 
 
+        mov eax, 1
+        mov ebx, 0
+        int 0x80
 
-
-
-
-
-
-
-section .data
-
-	message: db "Hello World"
-	mlen	equ $-message
 
 
